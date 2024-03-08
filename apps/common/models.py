@@ -5,6 +5,8 @@ from django.db.models.signals import pre_save, post_save
 from rest_framework.authtoken.models import Token
 from django.conf import settings
 from django.contrib.auth.models import User
+from .apps import User
+
 
 
 JISMONIY, YURIDIK = 'jismon', 'yuridik'
@@ -32,7 +34,7 @@ class Sponsor(BaseModel):
         (NEW, 'New'),
         (CANCELED, 'Canceled'),
         (MODERATION, 'Moderation'),
-        (ACTIVE, 'Active')
+        (ACTIVE, 'Active')   
     )
 
     name = models.CharField(max_length=233, verbose_name='Name')
@@ -100,3 +102,6 @@ class AllocatedAmount(BaseModel):
 
     def __str__(self) -> str:
         return self.sponsor.name
+
+
+    
