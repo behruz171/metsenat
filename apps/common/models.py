@@ -5,7 +5,7 @@ from django.db.models.signals import pre_save, post_save
 from rest_framework.authtoken.models import Token
 from django.conf import settings
 from django.contrib.auth.models import User
-from .apps import User
+# from .apps import User
 
 
 
