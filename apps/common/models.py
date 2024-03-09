@@ -77,7 +77,7 @@ class Student(BaseModel):
         'University',
         on_delete=models.PROTECT,
         related_name='students',
-        verbose_name='University'
+        verbose_name='University' 
     )
     def __str__(self) -> str:
         return self.name
