@@ -13,7 +13,7 @@ JISMONIY, YURIDIK = 'jismon', 'yuridik'
 NEW, ACTIVE, CANCELED, MODERATION = 'new', 'active', 'cancelled', 'moderation'
 
 BAKLAVR, MAGESTR, ASPERANT = 'baklavr', 'magestr', 'asperant'
-
+BY_CARD , CASH = 'Karta_orqali' , 'Naqd_pul'
 phone_validator = RegexValidator(regex=r'^\+998\d{9}$', message='Iltimos Togri kiriting :)', code='invalid')
 
 
@@ -36,6 +36,20 @@ class Sponsor(BaseModel):
         (MODERATION, 'Moderation'),
         (ACTIVE, 'Active')   
     )
+
+    
+
+
+    PAYMENT_CHOICES = (
+        (BY_CARD,'card'),
+         (CASH , 'Naqd pul'),
+    )
+
+
+    payment_type = models.CharField(max_length=250,
+                                    choices = PAYMENT_CHOICES,
+                                    default = CASH
+                                    )
 
     name = models.CharField(max_length=233, verbose_name='Name')
     amount = models.DecimalField(max_digits=20, decimal_places=2, verbose_name='Amount')
@@ -81,6 +95,8 @@ class Student(BaseModel):
     )
     def __str__(self) -> str:
         return self.name
+    
+     
 
 class University(BaseModel):
     name = models.CharField(max_length=233, verbose_name='Name')
@@ -89,10 +105,10 @@ class University(BaseModel):
 
 
 class AllocatedAmount(BaseModel):
-    amount = models.DecimalField(max_digits=20, decimal_places=2, verbose_name='Amount')
+    amount = models.DecimalField(max_digits=20, decimal_places=2, verbose_name='Amounts')
     student = models.ForeignKey(
         Student, on_delete=models.PROTECT,
-        related_name='sponsor_amounts',
+        related_name='student_amounts',
         verbose_name='Student'
     )
     sponsor = models.ForeignKey(
@@ -102,6 +118,5 @@ class AllocatedAmount(BaseModel):
 
     def __str__(self) -> str:
         return self.sponsor.name
-
-
+    
     
